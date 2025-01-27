@@ -1,7 +1,63 @@
-Initalization:
-1. a0 = which base
-2. know the length of a1 
+if a0 = 10:
+    return a1
+else:
+1. Copy the value of a1 to t0 
+2. know the length of a1 :
+    initialize a variuble to zero for counting the powers (t1)
+    loop:
+    Load the next character into t2
+    Check for null character, if null exit
+    increment the string pointer (t0)
+    increment the counter (t1 + 1)
+    loop again (j loop)
+3.Untill (for) t1 is not 0 (iterate through loop, subtract t1 - 1):
+    lb $t2, 0($t0) # load the next character into t2
+    3a. check to see if character is 0-9 -> [48-57] or a-z -> [97, 122]:
+            Compare the value to the higher and upper bound ranges for numbers 
+            if number:
+                Convert to number (extra steps)
+                store into t2
+            (implicit else) Compare the value to the higher and upper bound ranges for lowercase letters
+            if lowercase letter:
+                    convert to base 10 equivelent (extra steps)
+                    store into t2
+            (implicit large else) outcase the character is not recognized, return error (jump to end of function, and return -1)
+    3b. raise the base (a0) to the current power (t1):
+            copy value of a0 to t3
+            copy the value of t1 to t4
+            Untill t4 is not 0 (t4 - 1 repeat)
+                t3 = t3 * a0
+    3c. Multiply digit by the result:
+        t4 = t2 * t3
+    3d. Add to current return value sum
+        v0 = v0 + t4
+    3e. Decrement counter
+        t1 = t1 - 1
+    3f. check to see if t1 is not equal to -1. if it is, break out of the loop and end function, if not loop again.
 
-array stars a 0
-powers not negive also start at 0
+            
+    
+
+
+
+strlen:
+li $t1, 0 # initialize the count to zero
+loop:
+lb $t2, 0($t0) # load the next character into t1
+beqz $t2, exit # check for the null character
+addi $t0, $t0, 1 # increment the string pointer
+addi $t1, $t1, 1 # increment the count
+j loop # return to the top of the loop
+exit:
+
+
+
+add powers up based on the value of the array index utill you reach the null character
+
+1123456
+
+
+
+
+
 
