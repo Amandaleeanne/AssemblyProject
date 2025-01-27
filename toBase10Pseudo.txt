@@ -1,0 +1,7 @@
+Initalization:
+1. a0 = which base
+2. know the length of a1 
+
+array stars a 0
+powers not negive also start at 0
+
