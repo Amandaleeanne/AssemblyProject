@@ -43,7 +43,7 @@ else:
         v0 = v0 + t4
     3e. Decrement counter
         t1 = t1 - 1
-    3f. check to see if t1 is not equal to -1. if it is, break out of the loop and end function, if not loop again.
+    3f. check to see if t1 is less than 0. if it is, break out of the loop and end function, if not loop again.
 
 ----- end            
 Notes:
