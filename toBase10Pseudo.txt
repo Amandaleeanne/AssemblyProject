@@ -6,7 +6,7 @@ else:
     initialize a variuble to zero for counting the powers (t1)
     loop:
     Load the next character into t2
-    Check for null character, if null exit
+    Check for null character, if null exit to 3
     increment the string pointer (t0)
     increment the counter (t1 + 1)
     loop again (j loop)
@@ -21,12 +21,22 @@ else:
             if lowercase letter:
                     convert to base 10 equivelent (extra steps)
                     store into t2
-            (implicit large else) outcase the character is not recognized, return error (jump to end of function, and return -1)
+            else: (implicit large else) outcase the character is not recognized, return error (jump to end of function, and return -1)
     3b. raise the base (a0) to the current power (t1):
+            if t1 < 2:
+                if t1 == 1:
+                    t3 = a0
+                    jump to 3c
+                else:
+                    t3 = 1
+                    jump to 3c
+            (implicit else due to jumps)
             copy value of a0 to t3
             copy the value of t1 to t4
             Untill t4 is not 0 (t4 - 1 repeat)
+                if t4 == 1
                 t3 = t3 * a0
+            
     3c. Multiply digit by the result:
         t4 = t2 * t3
     3d. Add to current return value sum
