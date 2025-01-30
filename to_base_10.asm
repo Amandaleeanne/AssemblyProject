@@ -2,7 +2,7 @@
 #if the base is ten, calculations are not needed
 bne $a0, 10, not_base_10
 	li $v1, $a1
-	j end_fucntion
+	j end_function
 #Otherwise, 
 not_base_10:
 lw $t0, $t2 #Copy the value of a1 to t0 for changing things around
