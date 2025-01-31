@@ -1,0 +1,31 @@
+$a0 is base 10 whole number
+$a1 target base
+$a2 where the return string will go
+
+# Convert Base 10 to given base ($a1) by repeatedly dividing it by base and storing remainder
+1. Create temporary variuble to store non-converted modulo value ($t0)
+2. Create temporary variuble to store out-of-order string ($t1)
+3. Untill $a0 is not 0 (while):
+    3a. Obtain the modulo:
+    divide decimal number ($a0) by base ($a1)
+    reassign mflow to $a0 to get new divided value
+    reassign mfhi to temporary variuble ($t0) to get the remainder value to possibly convert
+    3b. Convert current remainder into appropriate symbol (number or letter) and append to return string ($a1):
+    If temporary variuble is less than or equal to 9 and greater than zero:
+        find the ASCII for that number (48 + number) and assign to $t2 for temp storage
+        append $t2 to $t1
+        jump back to 2
+    else:
+        find the ASCII for the number assigned to the alphabet ( number - 10 + 97) and assign to $t2 for temp storage 
+        append $t2 to $t1
+        jump back to 2
+        
+4. Add null termination byte (0) to $t1
+5. Reverse the string $t1 as it is currently out of order:
+   5a. find the length of the string, asign to $t1
+   5b. Untill (for) len($t1 -1) not equal to zero
+      get the byte at point $t1, store into $t2
+      append $t2 into return string ($a2)
+6. append null byte to $a2
+7. exit function 
+      
