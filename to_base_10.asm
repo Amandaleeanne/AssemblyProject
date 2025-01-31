@@ -19,6 +19,7 @@
 ToBase10:
 
 move $t0, $a1 #Copy the value of a1 to t0 for changing things around
+li $v0, 0 # Reset return value to zero
 li $t1, 0 # initialize the loop counter to zero
 
 strlen_loop:
@@ -28,12 +29,12 @@ strlen_loop:
     addi $t1, $t1, 1           # increment the count
     j strlen_loop              # return to the top of the loop
 exit_strlen: 
-subi $t0, $t0, 1 # Power = length of the string - 1
+subi $t1, $t1, 1 # Power = length of the string - 1
 
 #Next section of the function:
-# Loop condition: i != 0
+# Loop condition: i >= 0
 for_loop:
-    beqz $t1, for_loop_end    # if i == 0, exit loop
+    bltz $t1, for_loop_end    # if i < 0, exit loop
     lbu $t2, 0($a1) # Load next character into $t2
     NumericTest:
 	blt $t2, 48, Failure # Fails if ASCII value < 48
@@ -60,12 +61,14 @@ for_loop:
 	    mult $t3, $a0 # lo = $t3 * $a0
 	    mflo $t3 # $t3 = lo
 	    subi $t4, $t4, 1 # Decrement power counter
+	    j PowerLoop
     MultiplyDigit:
 	mult $t2, $t3 # Multiplies digit by the base raised to the current power
 	mflo $t4 # Stores result in $t4
 	add $v0, $v0, $t4 # v0 += $t4
     
 	sub $t1, $t1, 1 # Decrement the current power
+	addi $a1, $a1, 1 # Increment string address
 	j for_loop # Jump back to the loop condition check
 
 for_loop_end:
