@@ -10,26 +10,32 @@
 # Return value:
 #   $v0: base 10 whole number (or -1 on invalid args)  
 
-# $t0 stores a copy of $a1 for modifying
 # $t1 stores the current power (which starts out as the length of the string)
 # $t2 stores the current character of the string
 # $t3 stores a copy of $a0 for raising to the current power
 # $t4 stores a copy of $t1 for modifying
 
 ToBase10:
-
-move $t0, $a1 #Copy the value of a1 to t0 for changing things around
 li $v0, 0 # Reset return value to zero
 li $t1, 0 # initialize the loop counter to zero
 
-strlen_loop:
-    lb $t2, 0($t0)             # load the next character into t2
-    beqz $t2, exit_strlen      # check for the null character
-    addi $t0, $t0, 1           # increment the string pointer
-    addi $t1, $t1, 1           # increment the count
-    j strlen_loop              # return to the top of the loop
-exit_strlen: 
-subi $t1, $t1, 1 # Power = length of the string - 1
+# Push registers to preserve on to stack
+addi $sp, $sp, -8
+sw $ra, 0($sp)
+sw $a0, 4($sp)
+move $a0, $a1
+
+jal strlen_loop # Call strlen_loop from main.asm to get the length of the string
+
+# Pop register from stack
+lw $ra, 0($sp)
+lw $a0, 4($sp)
+addi $sp, $sp, 8
+
+move $t1, $v0 # Store return value in $t1
+li $v0, 0 # Reset return value
+subi $t1, $t1 1 # Subtract 1 from string length to get power
+
 
 #Next section of the function:
 # Loop condition: i >= 0

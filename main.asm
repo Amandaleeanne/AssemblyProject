@@ -8,6 +8,8 @@
 #   5. Print the target number and target base.
 #   6. Repeat until the source base is < 0.
 
+.globl strlen_loop
+
 .data
 
 # TODO: Add as many additional cases as you see fit.
@@ -17,7 +19,21 @@ out_bases: .word 16 2 -1
 
 .text
 
+# $t9 stores the current character in the string
+
 # TODO: implement.
+
+
+
+strlen_loop:
+    lb $t9, 0($a0)             # load the next character into t2
+    beqz $t9, exit_strlen      # check for the null character
+    addi $a0, $a0, 1           # increment the string pointer
+    addi $v0, $v0, 1           # increment the count
+    j strlen_loop              # return to the top of the loop
+exit_strlen: 
+jr $ra
+
 
 # Terminate
 li $v0, 10
