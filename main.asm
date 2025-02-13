@@ -86,7 +86,7 @@ move $a0, $s7
 syscall
 
 # Get length of string to increment pointer
-la $a0, in_numbers($s0)
+la $a0, in_numbers($s1)
 jal strlen_loop
 
 add $s1, $s1, $v0 # Increment pointer for in_numbers
